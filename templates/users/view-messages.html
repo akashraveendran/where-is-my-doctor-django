@@ -1,0 +1,78 @@
+{% extends "users/user-home.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .inbox-card {
+        background: linear-gradient(to right, rgb(116, 255, 116), rgb(106, 255, 181));
+        border-radius: 10px;
+    }
+
+    .outbox-card {
+        background: linear-gradient(to right, rgb(255, 226, 226), rgb(255, 248, 211));
+        border-radius: 10px;
+    }
+
+    .badge {
+        border-radius: 5px;
+        background: rgb(222, 204, 255);
+        padding: 5px 20px;
+        margin-left: 50px;
+    }
+</style>
+<section class="w3l-bottom-grids-6 py-5" id="services">
+    <div class="container py-lg-5 py-md-4 py-2">
+        <h5 class="title-subhny mb-2"> Messages </h5>
+        <div class="row">
+            <div class="col-6">
+
+                {% if user_messages_count == 0 %}
+                <h3><span>Haven't Found any Outbox Messages</span></h3>
+                {% else %}
+                <h3 class="text-center"><span>Outbox </span><span class="badge"> {{user_messages_count}}
+                    </span> </h3>
+                <div class="grids-area-hny main-cont-wthree-fea row pt-5 mt-5">
+                    {% for v in user_messages %}
+                    <div class="col-12  mb-3 shadow-sm p-3 inbox-card">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <img src="{{v.doctor.Doctor_Photo.url}}" width="50" style="border-radius: 50%;" alt="">
+                            <h4><a href="#feature" class="title-head fw-bold text-info">{{v.message}}</a></h4>
+                        </div>
+                        <div class="text-right">
+                            <p>To <span class="font-weight-bold">{{v.doctor.Doctor_name}} </span></p><br>
+                            <p>on <span class="font-weight-bold">{{v.added_Date}} </span></p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-6">
+
+                {% if reply_messages_count == 0 %}
+                <h3><span>Haven't Found any Inbox Messages</span> </h3>
+                {% else %}
+                <h3 class="text-center"><span>Inbox</span> <span class="badge"> {{reply_messages_count}} </span>
+                </h3>
+                <div class="grids-area-hny main-cont-wthree-fea row pt-5 mt-5">
+                    {% for v in reply_messages %}
+                    <div class="col-12  mb-3 shadow-sm p-3 outbox-card">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <img src="{{v.doctor.Doctor_Photo.url}}" width="50" style="border-radius: 50%;" alt="">
+                            <h4><a href="#feature" class="title-head fw-bold text-info">{{v.message}}</a></h4>
+                        </div>
+                        <div class="text-right">
+                            <p>From <span class="font-weight-bold">{{v.doctor.Doctor_name}} </span></p><br>
+                            <p>on <span class="font-weight-bold">{{v.added_Date}} </span></p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock%}

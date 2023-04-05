@@ -1,0 +1,56 @@
+{% extends "users/user-home.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    .text-right {
+        background: linear-gradient(to right, rgb(169, 255, 169), rgb(89, 255, 213));
+        padding: 5px 10px;
+        margin: 20px;
+        width: 100%;
+        border-radius: 5px;
+        color: black;
+        font-weight: bold;
+    }
+
+    .area-box {
+        background: linear-gradient(to right, #f5f8ff, rgb(234, 249, 255));
+    }
+</style>
+
+<section class="w3l-bottom-grids-6 py-5" id="services">
+    <div class="container py-lg-5 py-md-4 py-2">
+        <h5 class="title-subhny mb-2"> </h5>
+        {% if app_count == 0 %}
+        <h3 class="title-w3l mt-5"><span>Currently There Are No</span> Appoinments For You</h3>
+        {% else %}
+        <h3 class="title-w3l"><span>Here are Your </span> Appoinments</h3>
+        <div class="grids-area-hny main-cont-wthree-fea row pt-3 mt-5">
+            {% for b in all_bookings %}
+            <div class="col-lg-6 col-md-6 grids-feature mb-3">
+                <div class="area-box">
+                    <h4><a href="#feature" class="title-head">Doctor Name {{b.Doctor_Name}}</a></h4>
+                    <p>Booked on {{b.Booking_Date}} <br> at {{b.Booking_Time}} </p>
+                    {% if b.status == "Completed Checkup" %}
+                    <p class="text-right"> COMPLETED CHECKUP &nbsp;<i class="fa fa-check text-primary"></i> </p>
+                    <div>
+                        <a class="btn btn-warning mt-4" href="{% url 'give_feedback' b.Doctor_ID.id %}"> Give Feedback
+                        </a>
+                    </div>
+                    {% else %}
+                    <div>
+                        <a class="btn btn-danger mt-4" href="{% url 'user_cancel_booking' b.id %}"> Cancel
+                            Appoinment
+                        </a>
+                    </div>
+
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock%}

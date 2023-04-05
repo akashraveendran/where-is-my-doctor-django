@@ -1,0 +1,29 @@
+{% extends "doctors/doctor-home.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="w3l-bottom-grids-6 py-5" id="services">
+    <div class="container py-lg-5 py-md-4 py-2">
+        <h5 class="title-subhny mb-2"> </h5>
+
+        {% if feedback_count == 0 %}
+        <h3 class="title-w3l"><span>Haven't Found any</span> Feedbacks</h3>
+        {% else %}
+        <h3 class="title-w3l"><span>Here are some</span> Feedbacks For You</h3>
+        <div class="grids-area-hny main-cont-wthree-fea row pt-3 mt-5">
+            {% for v in feedbacks %}
+            <div class="col-12  mb-3 shadow-sm p-3">
+                <h4><a href="#feature" class="title-head fw-bold text-info">{{v.feedback}}</a></h4>
+                <div class="text-right">
+                    <p>By <span class="font-weight-bold">{{v.user.username}} </span></p><br>
+                    <p>on <span class="font-weight-bold">{{v.added_Date}} </span></p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock%}

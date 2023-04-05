@@ -1,0 +1,59 @@
+{% extends "users/user-home.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="w3l-bottom-grids-6 mt-5" id="services">
+    <div class="container py-lg-5 py-md-4 py-2">
+        <h5 class="title-subhny mb-2"> </h5>
+        <h3 class="title-w3l text-center"><span>Your User's Details </span></h3>
+        <div class="grids-area-hny main-cont-wthree-fea row  mt-5">
+            <div class="col-12 col-md-11 grids-feature mb-3 d-flex justify-content-center" style="min-height: 70vh;">
+                <div class="area-box bg-light"
+                    style="width: 80%;height: 100%;display: flex;justify-content: space-between;">
+                    <div>
+
+                        <img class="p-3" src="{{user.User_photo.url}}" alt=""
+                            style="width:100%;border-radius: 10px;object-fit: cover; height:300px">
+                        <form action="{% url 'upadate_profileImage' %}" method="post" class="px-5"
+                            enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="input-grids ">
+                                <input type="file" name="User_photo" accept=".jpg" required>
+                                <button class="btn btn-primary mt-3">Change Profile Image</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="right2 p-1" style="width: 100%;">
+                        <h4>
+                            <a href="#" class="title-head text-danger text-uppercase">
+                                <span class="fw-bold">{{user.User_Name}}</span>
+                            </a>
+                        </h4>
+                        <div class="text-muted p-4 ">
+                            Phone Number
+                            <br><span class="ml-4">{{user.Phone_Number}}</span>
+                            <br><br>
+                            Address <br>
+                            <span class="ml-4">{{user.Address}}</span>
+                            <br>
+                            <br>
+                            Age {{user.Age}} years
+                            <br>
+                            <br>
+                            <div class="text-center">
+                                <a href="{% url 'upadate_user_profile' %}" class="btn btn-primary">Update Profile
+                                    Details</a>
+                                <a href="{% url 'view_messages' %}" class="btn btn-primary mt-4">view Messages
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock%}

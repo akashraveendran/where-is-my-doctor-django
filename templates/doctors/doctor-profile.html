@@ -1,0 +1,89 @@
+{% extends "doctors/doctor-home.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    #services {
+        background: linear-gradient(to right, #fff3f7, #fffcfb);
+    }
+
+    .right2 {
+        background: #fffcfc;
+        padding: 30px;
+        /* transform: scaleY(1.3) scaleX(1.5); */
+        width: 50%;
+    }
+
+    .w3l-bottom-grids-6 .area-box {
+        padding: 0;
+    }
+</style>
+
+<section class="w3l-bottom-grids-6 mt-5" id="services">
+    <div class="container py-lg-5 py-md-4 py-2">
+        <h5 class="title-subhny mb-2"> </h5>
+        <h3 class="title-w3l text-center"><span> Doctor Profile </span></h3>
+        <div class="grids-area-hny main-cont-wthree-fea row  mt-5">
+            <div class="col-12 col-md-11 grids-feature mb-3 d-flex justify-content-center" style="height: 80vh;">
+                <div class="area-box bg-light"
+                    style="width: 80%;height: 100%;display: flex;justify-content: space-between;">
+                    <div>
+                        <img class="p-3" src="{{doctor.Doctor_Photo.url}}" alt=""
+                            style="width:100%;height: 80%;border-radius: 10px;object-fit: cover;">
+                        <form action="{% url 'upadate_doctor_profileImage' %}" method="post" class="px-5"
+                            enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="input-grids ">
+                                <input type="file" name="Doctor_Photo" accept=".jpg" required>
+                                <button class="btn btn-primary mt-3">Change Profile Image</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="right2">
+
+                        <h4><a href="#feature"
+                                class="title-head text-muted text-uppercase">{{doctor.doctor_ID.first_name}}
+                                {{doctor.doctor_ID.last_name}}</a>
+                        </h4>
+                        <p>
+                            <br>
+                            <span class="text-center font-weight-bold">Your Details</span>
+                            <br>
+                            Enroll NUmber : {{doctor.Enroll_No}}
+                            <br>
+                            {{doctor.Specialised_In}}
+                            <br>
+
+                            Have {{doctor.Experience}} of experience
+                            <br>
+                            {{doctor.About}}
+                            <br>
+                            <br>
+                            <br>
+                            <span class="text-center font-weight-bold">Clinic Details</span>
+
+                            <br>
+                            Clinic name: {{doctor.Clinic_Name}}
+                            <br>
+                            Clinic Address: {{doctor.Clinic_Address}}
+                            <br>
+                            Contact Number : {{doctor.Contact_Number}}
+                            <br>
+                            <br>
+                        <div class="text-center">
+                            <a href="{% url 'upadate_doctor_profile' %}" class="btn btn-primary">Update Profile
+                                Details</a>
+                        </div>
+
+                        </p>
+                        <br>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock%}

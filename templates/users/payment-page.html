@@ -1,0 +1,88 @@
+{% extends "users/user-home.html" %}
+{% load static %}
+
+
+{% block content %}
+<style>
+    .card {
+        background-color: white;
+        padding: 25px;
+        border-radius: 5px;
+        box-shadow: 1px 1px 10px 0px rgb(0 0 0 / 25%);
+        margin-top: 100px;
+    }
+
+    .title {
+        text-align: center;
+        letter-spacing: 1px;
+    }
+
+    .muted {
+        color: #8e7f7f;
+        display: block;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .btn_container {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .btn {
+        border-radius: 4px;
+        cursor: pointer;
+        padding: 4px 8px;
+        background-color: #ffaaa7;
+        color: white;
+        font-size: 1.2em;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+</style>
+
+<section class="w3l-bottom-grids-6 mt-5" id="services">
+    <div class="container py-lg-5 py-md-4 py-2">
+        <div class="card">
+            <h1 class="title">Proceed to pay</h1>
+            <small class="muted"> ₹500</small>
+            <div class="btn_container">
+                <!-- Payment Button -->
+                <button class="btn" id="pay-btn">Pay Now Using RazorPay</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- Razorpay's Javascript code. -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var options = {
+
+        // Enter the Key ID generated from the Dashboard
+        key: "{{ razorpay_merchant_key }}",
+
+        // Amount is in currency subunits.
+        // Default currency is INR. Hence,
+        // 50000 refers to 50000 paise
+        amount: "{{ razorpay_amount }}",
+        currency: "{{ currency }}",
+
+        // Your/store name.
+        name: "Pets",
+
+        // Pass the `id` obtained in the response of Step 1
+        order_id: "{{ razorpay_order_id }}",
+        callback_url: "{{ callback_url }}",
+    };
+    console.log(options)
+    // initialise razorpay with the options.
+    var rzp1 = new Razorpay(options);
+
+    // add event listener to the payment button.
+    document.getElementById("pay-btn").onclick = function (e) {
+        rzp1.open();
+        e.preventDefault();
+    };
+</script>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "users/user-home.html" %}
+{% load static %}
+
+{% block content %}
+<div class="breadcrumb-bg py-5  w3l-inner-page-breadcrumb">
+    <div class="container pt-lg-5 pt-md-3 p-lg-4 pb-md-3 my-lg-3">
+        <ul class="breadcrumbs-custom-path mt-4 text-center pt-5">
+            <li><a href="#">Feedback Form </a></li>
+            <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span>Form </li>
+        </ul>
+    </div>
+</div>
+<section class="w3l-contact-2 py-5" id="contact">
+    <div class="container py-lg-4 py-md-3 py-2">
+        <div class="title-content text-left">
+
+            <h3 class="title-w3l"><span>Provide Your Feedback To Improve us </span></h3>
+        </div>
+        <div class="contact-grids d-grid mt-5 pt-lg-3">
+
+            <div class="contact-right ml-5">
+                <form method="post" class="signin-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="input-grids">
+                        <label for="">Give Your Feedback</label>
+                        <textarea name="feedback" id="" cols="30" rows="10" required
+                            placeholder="type here.."></textarea>
+                    </div>
+                    <div class="submit-w3l-button text-lg-right">
+                        <button class="btn btn-style btn-primary">Submit Feedback</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+</section>
+{% endblock %}

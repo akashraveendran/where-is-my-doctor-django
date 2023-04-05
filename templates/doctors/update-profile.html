@@ -1,0 +1,64 @@
+{% extends "doctors/doctor-home.html" %}
+{% load static %}
+
+{% block content %}
+<div class="breadcrumb-bg py-5  w3l-inner-page-breadcrumb">
+    <div class="container pt-lg-5 pt-md-3 p-lg-4 pb-md-3 my-lg-3">
+        <ul class="breadcrumbs-custom-path mt-4 text-center pt-5">
+            <li><a href="#">Update Profile </a></li>
+            <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span>Form </li>
+        </ul>
+    </div>
+</div>
+<section class="w3l-contact-2 py-5" id="contact">
+    <div class="container py-lg-4 py-md-3 py-2">
+        <div class="title-content text-left">
+
+            <h3 class="title-w3l"><span>Update the Details of you </span></h3>
+        </div>
+        <div class="contact-grids d-grid mt-5 pt-lg-3">
+
+            <div class="contact-right ml-5">
+                <form method="post" class="signin-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="input-grids">
+                        <label for="">Enroll No</label>
+                        <input type="text" name="Enroll_No" value="{{doctor.Enroll_No}}" required>
+                    </div>
+                    <div class="input-grids">
+                        <label for="">Doctor name </label>
+                        <input type="text" name="Doctor_name" value="{{doctor.Doctor_name}}" required>
+                    </div>
+                    <div class="input-grids">
+                        <label for="">Specialised In </label>
+                        <input type="text" name="Specialised_In" value="{{doctor.Specialised_In}}" required>
+                    </div>
+                    <div class="input-grids">
+                        <label for="">Experience </label>
+                        <textarea name="Experience" id="" required>{{doctor.Experience}}</textarea>
+                    </div>
+                    <div class="input-grids">
+                        <label for="">Clinic Name</label>
+                        <input type="text" name="Clinic_Name" value="{{doctor.Clinic_Name}}" required>
+                    </div>
+                    <div class="input-grids">
+                        <label for="">Contact Number</label>
+                        <input type="text" name="Contact_Number" value="{{doctor.Contact_Number}}" required>
+                    </div>
+                    <div class="input-grids">
+                        <label for="">Clinic Address </label>
+                        <textarea name="Clinic_Address" id="" required>{{doctor.Clinic_Address}}</textarea>
+                    </div>
+                    <div class="input-grids">
+                        <label for=""> About </label>
+                        <textarea name="About" id="" required>{{doctor.About}}</textarea>
+                    </div>
+
+                    <div class="submit-w3l-button text-lg-right">
+                        <button class="btn btn-style btn-primary">Update Details</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+</section>
+{% endblock %}

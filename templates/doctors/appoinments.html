@@ -1,0 +1,51 @@
+{% extends "doctors/doctor-home.html" %}
+{% load static %}
+
+{% block content %}
+<section class="w3l-bottom-grids-6 py-5" id="services">
+    <div class="container mt-5 py-lg-5 py-md-4 py-2">
+        <h5 class="title-subhny mb-2"> </h5>
+        {% if app_count == 0 %}
+        <h3 class="title-w3l mt-5"><span>Currently There Are No</span> Appoinments For You</h3>
+        {% else %}
+        <h3 class="title-w3l"><span>Here are Your </span> Appoinments</h3>
+        <div class="grids-area-hny main-cont-wthree-fea row pt-3 mt-5">
+            {% for b in all_bookings %}
+            {% if b.status != 'cancelled' %}
+            <div class="col-lg-12 col-md-12 grids-feature mb-3">
+                <div class="area-box d-flex justify-content-between" style="width: 100%;">
+                    <div class="left">
+                        <h4><a href="#feature" class="title-head">Booked By {{b.Patient_Name}}</a></h4>
+                        <p>Booking Date {{b.Booking_Date}} <br>Booking Time : {{b.Booking_Time}}
+                            <br>
+                            Symptoms : {{b.Reason}}
+                            <br>
+                            {% if b.status == 'Cancelled By Doctor' %}
+                            <span class="text-danger">Status : {{b.status}}</span>
+                            {% else %}
+                            <span class="text-primary">Status : {{b.status}}</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                    {% if b.status != 'Cancelled By Doctor' %}
+                    <div class="right d-flex flex-column">
+                        <a class="btn btn-info mt-4" href="{% url 'view_patient' b.Patient_ID %}"> View Patient
+                            Details </a>
+                        {% if b.status != "Completed Checkup" %}
+                        <a class="btn btn-success mt-4" href="{% url 'completed_checkup' b.id %}"
+                            onclick="return confirm('Completed Checkup ?')"> Completed Check up
+                        </a>
+                        <a class="btn btn-danger mt-4" href="{% url 'cancel_booking' b.id %}"
+                            onclick="return confirm('Confirm cancel appoinment ?')"> Cancel Appoinment </a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock%}

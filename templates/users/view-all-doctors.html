@@ -1,0 +1,35 @@
+{% extends "users/user-home.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="w3l-bottom-grids-6 py-5" id="services">
+    <div class="container py-lg-5 py-md-4 py-2">
+        <h5 class="title-subhny mb-2">Our best Doctors </h5>
+        {% if doctor_count == 0 %}
+        <h3 class="title-w3l"><span>There Are No</span> Doctors Available</h3>
+        {% else %}
+        <h3 class="title-w3l"><span>Here are some of our </span> Doctors</h3>
+        <div class="grids-area-hny main-cont-wthree-fea row pt-3 mt-5">
+            {% for doctor in all_doctors %}
+            <div class="col-lg-6 col-md-6 grids-feature mb-3">
+                <div class="area-box">
+                    <img src="{{doctor.Doctor_Photo.url}}" alt=""
+                        style="width:300px;height: 300px;border-radius: 50%;object-fit: cover;">
+                    <h4><a href="#feature" class="title-head">{{doctor.Doctor_name}}</a></h4>
+                    <p>{{doctor.Specialised_In}} <br>{{doctor.About}} </p>
+
+                    <div> <a class="btn btn-primary mt-4" href="{% url 'book_doctor' doctor.id %}"> book an
+                            appoimnet</a>
+                        <a class="btn btn-outline-primary mt-4" href="{% url 'view_doctor_profile' doctor.id %}"> view
+                            Doctor's Profile</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock%}

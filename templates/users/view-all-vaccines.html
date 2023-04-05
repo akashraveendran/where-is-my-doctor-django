@@ -1,0 +1,34 @@
+{% extends "users/user-home.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="w3l-bottom-grids-6 py-5" id="services">
+    <div class="container py-lg-5 py-md-4 py-2">
+        <h5 class="title-subhny mb-2"> </h5>
+        <div class="mt-5 d-flex justify-content-end">
+            <a class="btn btn-outline-success" href="{% url 'add_vaccine' %}">Upload New Vaccine</a>
+        </div>
+        {% if vaccinecount == 0 %}
+        <h3 class="title-w3l"><span>You Haven't added any</span> Vaccinations</h3>
+        {% else %}
+        <h3 class="title-w3l"><span>Here are Your</span> Vaccinations</h3>
+        <div class="grids-area-hny main-cont-wthree-fea row pt-3 mt-5">
+            {% for v in all_vaccines %}
+            <div class="col-lg-6 col-md-6 grids-feature mb-3">
+                <div class="area-box">
+                    <h4><a href="#feature" class="title-head">Vaccination : {{v.Vaccination_Name}}</a></h4>
+                    <p>Vaccinated on {{v.Vaccinated_Date}} </p>
+                    <div>
+                        <a class="btn btn-danger mt-4" href="{{v.Vaccination_Document.url}}" target="_blank"> View
+                            vaccination Document </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock%}

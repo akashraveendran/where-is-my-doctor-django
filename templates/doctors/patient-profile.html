@@ -1,0 +1,58 @@
+{% extends "doctors/doctor-home.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="w3l-bottom-grids-6 mt-5" id="services">
+    <div class="container py-lg-5 py-md-4 py-2">
+        <h5 class="title-subhny mb-2"> </h5>
+        <h3 class="title-w3l text-center"><span> Patient Profile </span></h3>
+        <div class="grids-area-hny main-cont-wthree-fea row  mt-5">
+            <div class="col-12 col-md-11 grids-feature mb-3 d-flex justify-content-center" style="min-height: 70vh;">
+                <div class="area-box bg-light"
+                    style="width: 80%;height: 100%;display: flex;justify-content: space-between;">
+                    <img class="p-3" src="{{user.User_photo.url}}" alt=""
+                        style="width:50%;border-radius: 10px;object-fit: cover;">
+                    <div class="right2 p-1" style="width: 100%;">
+                        <h4>
+                            <a href="#" class="title-head text-danger text-uppercase">
+                                <span class="fw-bold">{{user.User_Name}}</span>
+                            </a>
+                        </h4>
+                        <div class="text-muted p-4 ">
+                            Phone Number
+                            <br><span class="ml-4">{{user.Phone_Number}}</span>
+                            <br><br>
+                            Address <br>
+                            <span class="ml-4">{{user.Address}}</span>
+                            <br>
+                            <br>
+                            Age {{user.Age}} years
+                            <br>
+                        </div>
+                        <a href="{% url 'view_doctor_appoinments' %}" class="btn btn-outline-danger"> Back</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="m-5 p-5 ">
+            <h1 class="text-center text-capitalize">{{user.User_Name}}'s Vaccinations</h1>
+            {% for v in all_vaccines %}
+            <div class="card mt-3 p-5 w-100" style="width: 100%;">
+                <p>
+                    Vaccination : <span class="fw-bold">{{v.Vaccination_Name}}</span>
+                    <br>
+                    Vaccination date : <span class="fw-bold">{{v.Vaccinated_Date}}</span>
+                    <br>
+                    <a class="btn btn-danger mt-4" href="{{v.Vaccination_Document.url}}" target="_blank">
+                        View
+                        vaccination Document </a>
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock%}
