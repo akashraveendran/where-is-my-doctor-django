@@ -80,7 +80,7 @@
                     </td>
                     <td>
                         {% if doctor.doctor_ID.is_active == False %}
-                        <a href="#" onclick="return confirm('Are you sure want to Approve?')" class="btn btn-success"><i
+                        <a href="{% url 'approve_doctor' doctor.doctor_ID.id  %}" onclick="return confirm('Are you sure want to Approve?')" class="btn btn-success"><i
                                 class="fa fa-trash-can">Approve</i></a>
                         {% endif %}
                         <a href="{% url 'delete_doctor' doctor.doctor_ID.id  %}" onclick="return confirm('Are you sure want to delete?')" class="btn btn-danger"><i

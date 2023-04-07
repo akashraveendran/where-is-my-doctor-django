@@ -14,6 +14,9 @@ from .decorators import doctor_only, not_auth_doctor
 
 @doctor_only
 def doctor_home(request):
+    doctor = DoctorProfile.objects.filter(doctor_ID=request.user.id)
+    if(len(doctor) == 0):
+        return redirect("add_doctor_profile")
     return render(request, "doctors/doctor-home.html")
 
 @not_auth_doctor
@@ -32,12 +35,10 @@ def d_signup(request):  # first get the user form from forms.py to render with s
                 return redirect("d_signup")
             else:
                 new_user = form.save()
-                new_user.is_active =  False
                 new_user.save()
-                # getting and assigning group to the user
                 group = Group.objects.get(name="doctors")
                 new_user.groups.add(group)
-                messages.info(request, "doctor Account Created!!! Please wait for the Approval of Admin")
+                messages.info(request, "doctor Account Created!!!")
                 return redirect("d_signin")
         else:
             messages.info(
@@ -75,10 +76,13 @@ def add_doctor_profile(request):
         add_form = DoctorProfieForm(request.POST,request.FILES)
         if(add_form.is_valid()):
             doctor = User.objects.get(id=request.user.id)
+            doctor.is_active =  False
+            doctor.save()
             updated_profile = add_form.save()
             updated_profile.doctor_ID = doctor
             updated_profile.save()
-            return redirect("doctor_home")
+            messages.info(request, "doctor Profile Created!!! Please wait for admin Approval")
+            return redirect("d_signin")
     return render(request, "doctors/add-profile.html",{"form":form})
 
 @doctor_only
