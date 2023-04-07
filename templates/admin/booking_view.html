@@ -1,0 +1,79 @@
+{% extends "admin/admin.html" %}
+{%load static%}
+{% block content %}
+<style>
+    table {
+        width: 70%;
+        margin-top: 30px;
+        margin-right: 40px;
+
+    }
+
+    th {
+        height: 30px;
+        padding: 15px;
+        text-align: left;
+        color: rgb(112, 39, 39);
+        background-color: rgb(183, 133, 176);
+
+    }
+
+    td {
+        padding: 15px;
+        text-align: left;
+        color: rgb(73, 65, 128);
+        background-color: rgb(250, 246, 246);
+
+    }
+    .right {
+        background-color: rgb(176, 138, 192);
+        justify-content: space-between;
+        border: violet;
+        color: whitesmoke;
+
+    }
+
+    .card-image {
+        height: 100px;
+        width: 100px;
+    }
+</style>
+
+
+<section class="w3l-bottom-grids-6 py-5 m-5" id="services">
+    <div class="first">
+        <div class="first-title mt-5">
+            <h2 class="text-center">Bookings List</h2>
+        </div>
+        <div class="main">
+            <table class="table" border="1">
+                <tr>
+                    <th>Patient name</th>
+                    <th>Doctor Name</th>
+                    <th>Booked on</th>
+                    <th>Booking Status</th>
+                </tr>
+                {% for booking in all_bookings %}
+                <tr>
+                    <td>
+                        <p class="doc-name">{{booking.Patient_Name}}</p><br>
+                    </td>
+                    <td>
+                        <p class="doc-name">{{booking.Doctor_Name}}</p><br>
+                    </td>
+                    <td>
+                        <p class="dpt-name">{{booking.Booking_Date}}</p><br>
+                    </td>
+                    <td>
+                        <p class="about">{{booking.status}} </p><br>
+                    </td>
+                </tr>
+                {%endfor%}
+
+
+            </table>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

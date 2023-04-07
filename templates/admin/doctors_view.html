@@ -1,0 +1,99 @@
+{% extends "admin/admin.html" %}
+{%load static%}
+{% block content %}
+<style>
+    table {
+        width: 70%;
+        margin-top: 30px;
+        margin-right: 40px;
+
+    }
+
+    th {
+        height: 30px;
+        padding: 15px;
+        text-align: left;
+        color: rgb(112, 39, 39);
+        background-color: rgb(183, 133, 176);
+
+    }
+
+    td {
+        padding: 15px;
+        text-align: left;
+        color: rgb(73, 65, 128);
+        background-color: rgb(250, 246, 246);
+
+    }
+
+    /* .first{
+    display: flex;
+    background-color: #dce1e3;
+    margin:50px;
+    padding: 20px;
+    justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+
+} */
+    .right {
+        background-color: rgb(176, 138, 192);
+        justify-content: space-between;
+        border: violet;
+        color: whitesmoke;
+
+    }
+
+    .card-image {
+        height: 100px;
+        width: 100px;
+    }
+</style>
+
+
+<section class="w3l-bottom-grids-6 py-5 m-5" id="services">
+    <div class="first">
+        <div class="first-title mt-5">
+            <h2 class="text-center">Doctors List</h2>
+        </div>
+        <div class="main">
+            <table class="table" border="1">
+                <tr>
+                    <th>Doctor name</th>
+                    <th>Enroll Number</th>
+                    <th>Department</th>
+                    <th>About</th>
+                    <th>Actions</th>
+                </tr>
+                {% for doctor in all_doctors %}
+                <tr>
+                    <td>
+                        <p class="doc-name">{{doctor.Doctor_name}}</p><br>
+                    </td>
+                    <td>
+                        <p class="doc-name">{{doctor.Enroll_No}}</p><br>
+                    </td>
+                    <td>
+                        <p class="dpt-name">{{doctor.Specialised_In}}</p><br>
+                    </td>
+                    <td>
+                        <p class="about">{{doctor.About}} </p><br>
+                    </td>
+                    <td>
+                        {% if doctor.doctor_ID.is_active == False %}
+                        <a href="#" onclick="return confirm('Are you sure want to Approve?')" class="btn btn-success"><i
+                                class="fa fa-trash-can">Approve</i></a>
+                        {% endif %}
+                        <a href="{% url 'delete_doctor' doctor.doctor_ID.id  %}" onclick="return confirm('Are you sure want to delete?')" class="btn btn-danger"><i
+                                class="fa fa-trash-can">delete</i></a>
+                    </td>
+                    <!-- </div> -->
+                </tr>
+                {%endfor%}
+
+
+            </table>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
